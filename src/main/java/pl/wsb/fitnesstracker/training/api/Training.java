@@ -3,38 +3,54 @@ package pl.wsb.fitnesstracker.training.api;
 import lombok.Getter;
 import pl.wsb.fitnesstracker.training.internal.ActivityType;
 import pl.wsb.fitnesstracker.user.api.User;
+import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
+import lombok.AccessLevel;
 
 import java.util.Date;
 
 @Getter
+@Entity
+@Table(name = "trainings")
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Training {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private User user;
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user_id;
 
-    private Date startTime;
+    @Column(name = "start_time", nullable = false)
+    private Date start_time;
 
-    private Date endTime;
+    @Column(name = "end_time", nullable = false)
+    private Date end_time;
 
-    private ActivityType activityType;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "activity_type", nullable = false)
+    private ActivityType activity_type;
 
-    private double distance;
+    @Column(name = "distance")
+    private Double distance;
 
-    private double averageSpeed;
+    @Column(name = "average_speed")
+    private Double average_speed;
 
     public Training(
-            final User user,
-            final Date startTime,
-            final Date endTime,
-            final ActivityType activityType,
-            final double distance,
-            final double averageSpeed) {
-        this.user = user;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.activityType = activityType;
+            final User user_id,
+            final Date start_time,
+            final Date end_time,
+            final ActivityType activity_type,
+            final Double distance,
+            final Double average_speed) {
+        this.user_id = user_id;
+        this.start_time = start_time;
+        this.end_time = end_time;
+        this.activity_type = activity_type;
         this.distance = distance;
-        this.averageSpeed = averageSpeed;
+        this.average_speed = average_speed;
     }
 }
