@@ -9,12 +9,16 @@ import org.springframework.context.event.EventListener;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import pl.wsb.fitnesstracker.event.EventRepository;
 import pl.wsb.fitnesstracker.training.api.Training;
 import pl.wsb.fitnesstracker.training.internal.ActivityType;
+import pl.wsb.fitnesstracker.training.internal.TrainingRepository;
 import pl.wsb.fitnesstracker.user.api.User;
+import pl.wsb.fitnesstracker.user.internal.UserRepository;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,11 +35,13 @@ import static java.util.Objects.isNull;
 @ToString
 @RequiredArgsConstructor
 class InitialDataLoader {
-
     private final JpaRepository<User, Long> userRepository;
-
     private final JpaRepository<Training, Long> trainingRepository;
-
+/*
+    private final UserRepository userRepository;
+    private final TrainingRepository trainingRepository;
+    private final EventRepository eventRepository;
+*/
     @EventListener
     @Transactional
     @SuppressWarnings({"squid:S1854", "squid:S1481", "squid:S1192", "unused"})
@@ -49,6 +55,16 @@ class InitialDataLoader {
 
 
         log.info("Finished loading initial data");
+        /*
+        log.info("------- TESTY ZAPYTAŃ LAB03 -------");
+
+        // Test sumy kilometrów (Dla użytkownika o ID 1)
+        log.info("Suma km dla użytkownika 1: {}", trainingRepository.sumDistanceByUserId(1L));
+        //Test domeny email
+        log.info("Użytkownicy z domeny gmail.com: {}", userRepository.findUsersByEmailDomain("gmail.com").size());
+
+        log.info("-----------------------------------");
+         */
     }
 
     private User generateUser(String name, String lastName, int age) {
