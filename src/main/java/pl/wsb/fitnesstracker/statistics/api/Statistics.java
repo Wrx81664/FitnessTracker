@@ -13,7 +13,6 @@ import pl.wsb.fitnesstracker.user.api.User;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
-
 public class Statistics {
 
     @Id
@@ -23,24 +22,21 @@ public class Statistics {
 
     @OneToOne
     @JoinColumn(name = "user_id", nullable = false, unique = true)
-    private User user_id;
+    private User user;
 
     @Column(name = "total_trainings", nullable = false)
-    private Integer total_trainings;
+    private int totalTrainings;
 
     @Column(name = "total_distance", nullable = false)
-    private Double total_distance;
+    private double totalDistance;
 
     @Column(name = "total_calories_burned", nullable = false)
-    private Integer total_calories_burned;
+    private int totalCaloriesBurned;
 
-    public Statistics(final User user_id,
-                      final Integer total_trainings,
-                      final Double total_distance,
-                      final Integer total_calories_burned) {
-        this.user_id = user_id;
-        this.total_trainings = total_trainings;
-        this.total_distance = total_distance;
-        this.total_calories_burned = total_calories_burned;
+    public Statistics(User user, int totalTrainings, double totalDistance, int totalCaloriesBurned) {
+        this.user = user;
+        this.totalTrainings = totalTrainings;
+        this.totalDistance = totalDistance;
+        this.totalCaloriesBurned = totalCaloriesBurned;
     }
 }

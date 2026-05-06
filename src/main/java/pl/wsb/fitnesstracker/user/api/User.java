@@ -7,7 +7,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-
 import java.time.LocalDate;
 
 @Entity
@@ -15,7 +14,6 @@ import java.time.LocalDate;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
-
 public class User {
 
     @Id
@@ -24,26 +22,26 @@ public class User {
     private Long id;
 
     @Column(name = "first_name", nullable = false)
-    private String first_name;
+    private String firstName;
 
     @Column(name = "last_name", nullable = false)
-    private String last_name;
+    private String lastName;
 
     @Column(name = "birthdate", nullable = false)
     private LocalDate birthdate;
 
-    @Column(name = "email",nullable = false, unique = true)
+    @Column(nullable = false, unique = true)
     private String email;
 
-    public User(final String first_name,
-                final String last_name,
-                final LocalDate birthdate,
-                final String email) {
-        this.first_name = first_name;
-        this.last_name = last_name;
+    public User(
+            final String firstName,
+            final String lastName,
+            final LocalDate birthdate,
+            final String email) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.birthdate = birthdate;
         this.email = email;
     }
 
 }
-
